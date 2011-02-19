@@ -38,19 +38,12 @@
         
 <div class="line-header"><a href="/signup">Sign-up</a> | <a href="/login">Login</a> | <a href="/logout">Logout</a></div> 
 
-<h2><a href="project-link">Project Title</a></h2>
-<div><span class="date">Bob Smith, David Lane</span><br />
-	Description goes here and here and here and here and here and here and here and here blah blah blah blah blah.</div> 
+{% for pr in projects %} <h2><a href="/pro">{{ pr.name }}</a></h2>
+<div><span class="date"> {% for staffs in pr.staff %}{{staffs}}{% endfor %}</span><br />
+	{{ pr.short_description }}</div> 
+	<div class="needs"><strong>Still needs: {% for need in pr.needs %}{{need}}{% endfor %}</strong>
+	{% endfor }
     
-<div class="needs"><strong>Still needs:</strong> Front end designer, back end developer, graphic artist
-</div>
-
-<h2><a href="project-link">Project Title</a></h2>
-<div><span class="date">Bob Smith, David Lane</span><br />
-	Description goes here and here and here and here and here and here and here and here blah blah blah blah blah.</div> 
-    
-<div class="needs"><strong>Still needs:</strong> Front end designer, back end developer, graphic artist
-</div>
 
 
 </div> 
