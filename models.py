@@ -37,6 +37,10 @@ class Person(SluggedModel):
     
     class Meta:
         verbose_name_plural = "people"
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('person', [], {'slugPerson': self.slug})
 
 class Project(SluggedModel):
     name = models.CharField(max_length=150)
@@ -47,6 +51,11 @@ class Project(SluggedModel):
 
     def __unicode__(self):
         return u"%s" % self.name
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('project', [], {'slugProject': self.slug})
+
 
 ###########$###########
 ## F-keyed models    ##
