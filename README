@@ -1,3 +1,5 @@
-This Django app powers http://nicar.adamplayford.com.
+This Django app powers http://nicar.adamplayford.com. By Adam Playford and Andy Boyle.
 
-By Adam Playford and Andy Boyle
+DEPLOYMENT NOTE:
+- Please put the following in settings.py:
+  AUTH_PROFILE_MODULE = 'hackathon.Person'
