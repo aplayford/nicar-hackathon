@@ -36,11 +36,11 @@
         </div></div> 
         <div id="content"><div> 
         
-<div class="line-header">David Lane</div> 
-	Quick bio goes here and here and here and skills and skills and skills.</div>
-<div class="url"><strong>Website: </strong><a href="http://www.blahblahblah.com">blahblahblah.com</a></div>
-<div class="has"><strong>Skill type: </strong>Back end developer</div>
-<div class="projects"><strong>Project(s): </strong>Project Name 1, Project Name 2 (Or None)</div>
+<div class="line-header">{{ me.name }}</div> 
+	{{ me.bio }}</div>
+{% if me.website %}<div class="url"><strong>Website: </strong><a href="{{ me.website }}">{{ me.website }}</a></div>{% endif %}
+<div class="has"><strong>Skill type: </strong>{{ me.skills_summary }}</div>
+<div class="projects"><strong>Project(s): </strong>Test</div>
 <div class="line-header">If no projects, click here to email Johnny</div>
 </div>
 
