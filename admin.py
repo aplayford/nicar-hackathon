@@ -7,7 +7,7 @@ from hackathon.models import Person, Project, ProjectNeed, ProjectStaff, RoleCho
 ########################
 
 class PersonAdmin(admin.ModelAdmin):
-	pass
+    pass
 admin.site.register(Person, PersonAdmin)
 
 #########################
@@ -15,13 +15,13 @@ admin.site.register(Person, PersonAdmin)
 #########################
 
 class ProjectNeedInline(admin.TabularInline):
-	model = ProjectNeed
+    model = ProjectNeed
 
 class ProjectStaffInline(admin.TabularInline):
-	model = ProjectStaff
+    model = ProjectStaff
 
 class ProjectAdmin(admin.ModelAdmin):
-	inlines = [ProjectStaffInline, ProjectNeedInline]
+    inlines = [ProjectStaffInline, ProjectNeedInline]
 admin.site.register(Project, ProjectAdmin)
 
 ##############
@@ -29,4 +29,4 @@ admin.site.register(Project, ProjectAdmin)
 ##############
 
 for m in (RoleChoice, FlagChoice):
-	admin.site.register(m)
+    admin.site.register(m)
