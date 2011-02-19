@@ -84,5 +84,5 @@ class ChoiceModel(models.Model):
 class RoleChoice(ChoiceModel):
     pass
 
-class FlagChoice(models.Model):
+class FlagChoice(ChoiceModel):
     pass
