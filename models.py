@@ -67,11 +67,20 @@ class ProjectNeed(models.Model):
     role_needed = models.ForeignKey('RoleChoice')
     number_slots = models.PositiveIntegerField(default=1)
 
+    def __unicode__(self):
+        if number_spots > 1:
+            return u"%s (%s)" % (self.role_needed, self.number_slots)
+        else:
+            return u"%s" % self.role_needed
+
 class ProjectStaff(models.Model):
     project = models.ForeignKey("Project", related_name="staff")
     person = models.ForeignKey("Person")
     roles = models.ManyToManyField('RoleChoice', blank=True)
     team_leader = models.BooleanField()
+
+    def __unicode__(self):
+        return u"%s" % self.person
 
     class Meta:
         verbose_name_plural = "project staff"
