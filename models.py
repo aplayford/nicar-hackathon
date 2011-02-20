@@ -68,7 +68,7 @@ class ProjectNeed(models.Model):
     number_slots = models.PositiveIntegerField(default=1)
 
     def __unicode__(self):
-        if self.number_spots > 1:
+        if self.number_slots > 1:
             return u"%s (%s)" % (self.role_needed, self.number_slots)
         else:
             return u"%s" % self.role_needed
