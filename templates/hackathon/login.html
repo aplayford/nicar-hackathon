@@ -1,20 +1,28 @@
 {% extends "hackathon/base.html" %}
 
-{% block pageTitle %}NICAR Hackathon Project List{% endblock %}
-
 {% block bodyContent %}
+
 <div class="line-header">Login</div> 
-<div class="email"><strong>Email </strong><form action="something" method="get"><input name="as_q" type="text" id="sitesearchInput" size="25" />
-        <input type="submit" class="search" value="Enter" id="searchPF" /><input type="hidden" name="as_sitesearch" value="recruits.gatorsports.com" /></form>
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post" action="{% url django.contrib.auth.views.login %}">
+{% csrf_token %}
+
+<div class="email">
+    <strong>E-mail</strong> <br>
+    {{ form.username }}
 </div>
-<div class="password"><strong>Password </strong><form action="something" method="get"><input name="as_q" type="text" id="sitesearchInput" size="25" />
-        <input type="submit" class="search" value="Enter" id="searchPF" /><input type="hidden" name="as_sitesearch" value="recruits.gatorsports.com" /></form>
 
+<div class="password">
+    <strong>Password</strong> <br>
+    {{ form.password }}
 </div>
 
+<input type="submit" value="Log in" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
 
-</div> 
- 
- 
-</div></div> 
-{% endblock bodyContent %}
+{% endblock %}
