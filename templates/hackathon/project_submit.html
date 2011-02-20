@@ -6,7 +6,7 @@
 
 <div class="line-header">Project Sign-up</div> 
 
-<form action="{% url signup %}" method="post">
+<form action="{% url project-submit %}" method="post">
 	{% for field in form %}
 		{% include "hackathon/includes/field.html" %}
 	{% endfor %}
