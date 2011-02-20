@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from hackathon.models import Person, Project, ProjectNeed, ProjectStaff, RoleChoice, FlagChoice
+from hackathon.models import Person, Project, ProjectNeed, ProjectStaff, RoleChoice
 
 ########################
 ## Person admin pages ##
@@ -28,5 +28,4 @@ admin.site.register(Project, ProjectAdmin)
 ## Defaults ##
 ##############
 
-for m in (RoleChoice, FlagChoice):
-    admin.site.register(m)
+admin.site.register(RoleChoice)

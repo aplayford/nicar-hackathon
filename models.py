@@ -47,8 +47,6 @@ class Project(SluggedModel):
     description = models.TextField()
     website = models.URLField(blank=True)
     repo = models.URLField(blank=True)
-    
-    characteristics = models.ManyToManyField('FlagChoice', blank=True, verbose_name="Project involves:")
 
     def __unicode__(self):
         return u"%s" % self.name
@@ -106,7 +104,4 @@ class ChoiceModel(models.Model):
         ordering = ('name',)
 
 class RoleChoice(ChoiceModel):
-    pass
-
-class FlagChoice(ChoiceModel):
     pass
