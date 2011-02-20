@@ -93,19 +93,30 @@ def submit_project(request):
 
     if not varsContext['logged_in']:
         return HttpResponseRedirect("%s?next=%s" % (reverse('signup'), reverse('submit-project')))
-
+    
+    if 'next' in request.GET and request.GET['next']:
+        varsContext['next'] = request.GET['next']
+        varsContext['target'] = "%s?next=%s" % (reverse('submit-project'), varsContext['next'])
+    else:
+        varsContext['next'] = reverse('index')
+        varsContext['target'] = reverse('submit-project')
+    
     StaffFormset = inlineformset_factory(Project, ProjectStaff)
     NeedsFormset = inlineformset_factory(Project, ProjectNeed)
     
     if request.method == 'POST':
         form = ProjectForm(request.POST)
-        project_staff = StaffFormset(request.POST, prefix="staff")
-        project_needs = NeedsFormset(request.POST, prefix="needs")
-        if form.is_valid() and project_staff.is_valid() and project_needs.is_valid():
-            project_staff.save()
-            project_needs.save()
-            form.save()
-            HttpResponseRedirect(reverse('submit-project-success'))
+        if form.is_valid():
+            proj = form.save()
+            project_staff = StaffFormset(request.POST, prefix="staff", instance=proj)
+            project_needs = NeedsFormset(request.POST, prefix="needs", instance=proj)
+            if project_staff.is_valid() and project_needs.is_valid():
+                project_staff.save()
+                project_needs.save()
+                return HttpResponseRedirect(varsContext['next'])
+        else:
+            project_staff = StaffFormset(request.POST, prefix="staff")
+            project_needs = NeedsFormset(request.POST, prefix="needs")
     else:
         form = ProjectForm()
         project_staff = StaffFormset(prefix="staff")
