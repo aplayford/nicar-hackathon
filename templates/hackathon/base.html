@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+    <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <title>{% block pageTitle %}{% endblock %}</title> 
+<style type="text/css">
+    * {margin:0;padding:0;}
+    a, a:visited {color:#333;text-decoration:none;font-weight:bold;}
+    a:hover {color:#fff;}
+    #footer a:hover {color:#ffc757;}
+    body {font-size:16px;font-weight:normal;font-family:"Georgia",Georgia,serif;background:#A66F00;color:#333;}
+    /* overall */
+    .line-header {font-weight:bold;font-size:32px;margin:10px 0 15px;}
+    #nav {background-color:#FFBF40;padding:10px 0 20px;}
+    #nav > div {width:600px;margin:0 auto;}
+    #nav h1 a, #nav h1 a {color:#000;}
+    #nav h1 a:hover {color:#555;}
+    #content {background-color:#FFD073;padding:20px 0;}
+    #content > div {width:600px;margin:0 auto;}
+    #footer {background:#A66F00;color:#333;padding:20px 0;}
+    #footer > div {width:600px;margin:0 auto;} 
+    #footer > div > div {}
+    /* home */
+    div.stream {margin:5px 0;font-size:14px;}
+    div.stream .left {width:350px;float:left;}
+    div.stream .right {width:150px;float:right;}
+    h2 {margin-top:10px;}
+    span.date {display:inline-block;margin:0 5px 0 0;color:#333;font-weight:bold;}
+    ul {padding:0 0 0 25px;}
+    ul li {margin:5px 0 8px;list-style-type:square;}
+</style>
+    </head>
+    <body class=""> 
+        <div id="nav"><div> 
+            <h1><a href="/">NICAR Hackathon Project List</a></h1> 
+        </div></div> 
+        <div id="content"><div> 
+        {% block bodyContent %}{% endblock %}
+        <div id="footer"><div> 
+            <div>Built by <a href="http://www.adamplayford.com">Adam Playford</a> and <a href="http://www.andymboyle.com">Andy Boyle</a> in <a href="http://www.djangoproject.com/">Django</a></div>
+            <div>Site design totally stolen from <a href="http://www.jeremybowers.com">jeremybowers.com</a></div> 
+        </div></div> 
+    </body> 
+</html>
