@@ -7,9 +7,38 @@
 <div class="line-header">Project Sign-up</div> 
 
 <form action="{% url project-submit %}" method="post">
-	{% for field in form %}
-		{% include "hackathon/includes/field.html" %}
-	{% endfor %}
+	{{form.id}}
+	
+	<div class="field">
+		<strong>{{form.name.label_tag}}</strong> <br>
+		{{form.name}} <br>
+		{% if form.description.errors %}<div class="form_error">{{form.name.errors}}</div>{% endif %}
+	</div>
+
+	<div style="flat: left; width: 350px;">
+		<div class="field">
+			<strong>{{form.description.label_tag}}</strong> <br>
+			{{form.description}} <br>
+			{% if form.description.errors %}<div class="form_error">{{form.description.errors}}</div>{% endif %}
+		</div>
+		<div class="field">
+			<strong>{{form.website.label_tag}}</strong> <br>
+			{{form.website}} <br>
+			{% if form.website.errors %}<div class="form_error">{{form.website.errors}}</div>{% endif %}
+		</div>
+		<div class="field">
+			<strong>{{form.repo.label_tag}}</strong> <br>
+			{{form.repo}} <br>
+			{% if form.repo.errors %}<div class="form_error">{{form.repo.errors}}</div>{% endif %}
+		</div>
+	</div>
+
+	<div class="field" style="float: right; width: 150px;">
+		<strong>{{form.characteristics.label_tag}}</strong> <br>
+		{{form.characteristics}}
+	</div>
+
+	<div style="clear: both;"></div>
 
 	<b>PROJECT STAFF</b>
 	{% for form in project_staff.forms %}
@@ -17,6 +46,7 @@
 		{% include "hackathon/includes/field.html" %}
 		{% endfor %}
 	{% endfor %}
+	{{project_staff.management_form}}
 
 	<b>PROJECT NEEDS</b>
 	{% for form in project_needs.forms %}
@@ -24,6 +54,7 @@
 		{% include "hackathon/includes/field.html" %}
 		{% endfor %}
 	{% endfor %}
+	{{project_needs.management_form}}
 
 	{% csrf_token %}
 

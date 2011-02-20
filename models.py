@@ -27,10 +27,10 @@ class Person(SluggedModel):
     
     skills_summary = models.TextField(blank=True)
 
-    roles_willing = models.ManyToManyField('RoleChoice', blank=True)
+    roles_willing = models.ManyToManyField('RoleChoice', blank=True, verbose_name="willing to help with:")
 
-    email = models.EmailField()
-    phone = PhoneNumberField(blank=True)
+    email = models.EmailField("e-mail")
+    website = models.URLField(blank=True)
 
     def __unicode__(self):
         return u"%s" % self.name
@@ -44,8 +44,9 @@ class Person(SluggedModel):
 
 class Project(SluggedModel):
     name = models.CharField(max_length=150)
-    short_description = models.CharField(max_length=250)
-    long_description = models.TextField(blank=True)
+    description = models.TextField()
+    website = models.URLField(blank=True)
+    repo = models.URLField(blank=True)
     
     characteristics = models.ManyToManyField('FlagChoice', blank=True, verbose_name="Project involves:")
 

@@ -71,16 +71,16 @@ def project_submit(request):
     
     if request.method == 'POST':
         form = ProjectForm(request.POST)
-        project_staff = StaffFormset(request.POST, request.FILES)
-        project_needs = NeedsFormset(request.POST, request.FILES)
+        project_staff = StaffFormset(request.POST, prefix="staff")
+        project_needs = NeedsFormset(request.POST, prefix="needs")
         if form.is_valid() and project_staff.is_valid() and project_needs.is_valid():
             project_staff.save()
             project_needs.save()
-            form.is_valid()
+            form.save()
     else:
         form = ProjectForm()
-        project_staff = StaffFormset()
-        project_needs = NeedsFormset()
+        project_staff = StaffFormset(prefix="staff")
+        project_needs = NeedsFormset(prefix="needs")
     
     varsContext = {
         "form": form,

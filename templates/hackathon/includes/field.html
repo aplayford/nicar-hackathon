@@ -1,4 +1,4 @@
-	<div class="field">
+	<div class="field" {% if field.hidden %}style="display: none;"{% endif %}>
 		<strong>{{field.label_tag}}</strong> <br>
 		{{field}} <br>
 		{% if field.help_text %}<i>{{field.help_text}}</i>{% endif %}

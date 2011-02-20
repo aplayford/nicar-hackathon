@@ -1,5 +1,5 @@
 /****************************************************
- * Basic site look, borrowed from jeremeybowers.com *
+ * Basic site look, borrowed from jeremybowers.com *
  ****************************************************/
 
 * {margin:0;padding:0;}
@@ -33,4 +33,8 @@ ul li {margin:5px 0 8px;list-style-type:square;}
 /*****************************
  * Hackathon-specific styles *
  *****************************/
+
+.field {
+	margin-bottom: 5px;
+}
 
