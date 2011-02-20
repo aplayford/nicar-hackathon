@@ -40,8 +40,8 @@
 	{{ me.long_description }}</div>
 <div class="url"><strong>Link: </strong><a href="http://www.blahblahblah.com">blahblahblah.com</a></div> 
 <div class="has"><strong>Leader: </strong>{{ me.leader }}</div>
-<div class="team"><strong>Team: </strong>{% for staffs in me.staff.all %}<a href="{{ staffs.get_absolute_url}}">{{ staffs.name }}</a>{% endfor %}</div>
-<div class="needs"><strong>Still needs:</strong> {% for need in me.needs.all %}{{need}}{% endfor %}</div>
+<div class="team"><strong>Team: </strong>{% for staffs in me.staff.all %}<a href="{{ staffs.get_absolute_url}}">{{ staffs.name }}{% if forloop.first %}{% else %}, {% endif %}</a>{% endfor %}</div>
+<div class="needs"><strong>Still needs:</strong> {% for need in me.needs.all %}{% if forloop.first %}{% else %}, {% endif %}{{need}}{% endfor %}</div>
 <div class="line-header">Join this team</div>
 </div>
 

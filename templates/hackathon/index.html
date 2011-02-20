@@ -6,9 +6,9 @@
 <div class="line-header"><a href="/signup">Sign-up</a> | <a href="/login">Login</a> | <a href="/logout">Logout</a></div> 
 
 {% for pr in projects %} <h2><a href="{{ pr.get_absolute_url }}">{{ pr.name }}</a></h2>
-<div><span class="date"> {% for staffs in pr.staff.all %}{{ staffs.name }}{% endfor %}</span><br />
+<div><span class="date"> <strong>Team: </strong>{% for staffs in pr.staff.all %}{% if forloop.first %}{% else %}, {% endif %}{{ staffs.name }}{% endfor %}</span><br />
     {{ pr.short_description }}</div> 
-    <div class="needs"><strong>Still needs: {% for need in pr.needs.all %}{{need}}{% endfor %}</strong>
+    <div class="needs"><strong>Still needs: {% if forloop.first %}{% else %}, {% endif %}{% for need in pr.needs.all %}{{need}}, {% endfor %}</strong>
     {% endfor %}
     
 
