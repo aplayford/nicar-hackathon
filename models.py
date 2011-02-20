@@ -47,7 +47,7 @@ class Project(SluggedModel):
     short_description = models.CharField(max_length=250)
     long_description = models.TextField(blank=True)
     
-    characteristics = models.ManyToManyField('FlagChoice', blank=True)
+    characteristics = models.ManyToManyField('FlagChoice', blank=True, verbose_name="Project involves:")
 
     def __unicode__(self):
         return u"%s" % self.name
@@ -102,6 +102,7 @@ class ChoiceModel(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ('name',)
 
 class RoleChoice(ChoiceModel):
     pass
