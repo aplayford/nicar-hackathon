@@ -15,6 +15,11 @@
 		{% if form.description.errors %}<div class="form_error">{{form.name.errors}}</div>{% endif %}
 	</div>
 
+	<div class="field" style="float: right; width: 150px;">
+		<strong>{{form.characteristics.label_tag}}</strong> <br>
+		{{form.characteristics}}
+	</div>
+
 	<div style="flat: left; width: 350px;">
 		<div class="field">
 			<strong>{{form.description.label_tag}}</strong> <br>
@@ -31,11 +36,6 @@
 			{{form.repo}} <br>
 			{% if form.repo.errors %}<div class="form_error">{{form.repo.errors}}</div>{% endif %}
 		</div>
-	</div>
-
-	<div class="field" style="float: right; width: 150px;">
-		<strong>{{form.characteristics.label_tag}}</strong> <br>
-		{{form.characteristics}}
 	</div>
 
 	<div style="clear: both;"></div>
