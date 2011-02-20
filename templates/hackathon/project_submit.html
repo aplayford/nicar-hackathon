@@ -6,31 +6,31 @@
 
 <div class="line-header">Project Sign-up</div> 
 
-<form action="{% url submit-project %}" method="post">
+<form action="{{target}}" method="post">
 	{{form.id}}
 	
-	<div class="field">
+	<div class="field {% if form.name.errors %}error{% endif %}">
 		<strong>{{form.name.label_tag}}</strong> <br>
 		{{form.name}} <br>
-		{% if form.description.errors %}<div class="form_error">{{form.name.errors}}</div>{% endif %}
+		{% if form.description.errors %}<div class="error_txt">{{form.name.errors}}</div>{% endif %}
 	</div>
 	
-	<div class="field">
+	<div class="field {% if form.description.errors %}error{% endif %}">
 		<strong>{{form.description.label_tag}}</strong> <br>
 		{{form.description}} <br>
-		{% if form.description.errors %}<div class="form_error">{{form.description.errors}}</div>{% endif %}
+		{% if form.description.errors %}<div class="error_txt">{{form.description.errors}}</div>{% endif %}
 	</div>
 	
-	<div class="field">
+	<div class="field {% if form.website.errors %}error{% endif %}">
 		<strong>{{form.website.label_tag}}</strong> <br>
 		{{form.website}} <br>
-		{% if form.website.errors %}<div class="form_error">{{form.website.errors}}</div>{% endif %}
+		{% if form.website.errors %}<div class="error_txt">{{form.website.errors}}</div>{% endif %}
 	</div>
 	
-	<div class="field">
+	<div class="field {% if form.repo.errors %}error{% endif %}">
 		<strong>{{form.repo.label_tag}}</strong> <br>
 		{{form.repo}} <br>
-		{% if form.repo.errors %}<div class="form_error">{{form.repo.errors}}</div>{% endif %}
+		{% if form.repo.errors %}<div class="error_txt">{{form.repo.errors}}</div>{% endif %}
 	</div>
 	
 	<b>PROJECT STAFF</b>
@@ -40,7 +40,7 @@
 		{% endfor %}
 	{% endfor %}
 	{{project_staff.management_form}}
-
+	
 	<b>PROJECT NEEDS</b>
 	{% for form in project_needs.forms %}
 		{% for field in form %}
