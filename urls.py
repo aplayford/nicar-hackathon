@@ -9,5 +9,6 @@ urlpatterns = patterns('hackathon.views',
     url(r'^project_sign_up/$', 'project_sign_up', name="project_sign_up"),
     url(r'^signup/$', 'signup', name="signup"),
 ) + patterns('',
-	url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'hackathon/login.html'}),
+	url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'hackathon/login.html'}, name="login"),
+	url(r'^logout/$', 'django.contrib.auth.views.logout', {}, name="logout"),
 )

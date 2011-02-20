@@ -33,7 +33,8 @@
     <body class=""> 
         <div id="nav"><div> 
             <h1><a href="/">NICAR Hackathon Project List</a></h1> 
-        </div></div> 
+            <div class="login">{% if logged_in %}Hello <a href="{{user.get_absolute_url}}">{{user}}</a>. <a href="{% url logout %}">[Log out]</a>{% endif %}</div>
+        </div></div>
         
         <div id="content"><div> 
         {% block bodyContent %}{% endblock %}
