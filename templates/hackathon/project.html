@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"> 
     <head> 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-    <title>NICAR Hackathon Project List</title> 
+    <title>NICAR Hackathon Project: {{ me.name }}</title> 
 <style type="text/css"> 
     * {margin:0;padding:0;}
     a, a:visited {color:#333;text-decoration:none;font-weight:bold;}
@@ -36,12 +36,12 @@
         </div></div> 
         <div id="content"><div> 
         
-<div class="line-header">Project Title: Open</div> 
-	Description goes here and here and here and here and here and here and here and here blah blah blah blah blah.</div>
+<div class="line-header">{{ me.name }}</div> 
+	{{ me.long_description }}</div>
 <div class="url"><strong>Link: </strong><a href="http://www.blahblahblah.com">blahblahblah.com</a></div> 
-<div class="has"><strong>Leader: </strong>Bob Smith, front end designer</div>
-<div class="team"><strong>Team: </strong>David Lane, back end developer; Johnny Damon, burrito eater</div>
-<div class="needs"><strong>Still needs:</strong> Front end designer, back end developer, graphic artist
+<div class="has"><strong>Leader: </strong>{{ me.leader }}</div>
+<div class="team"><strong>Team: </strong>{% for staffs in me.staff.all %}<a href="{{ staffs.get_absolute_url}}">{{ staffs.name }}</a>{% endfor %}</div>
+<div class="needs"><strong>Still needs:</strong> {% for need in me.needs.all %}{{need}}{% endfor %}</div>
 <div class="line-header">Join this team</div>
 </div>
 
