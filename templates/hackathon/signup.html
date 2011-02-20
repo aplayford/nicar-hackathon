@@ -3,11 +3,17 @@
 {% block pageTitle %}Sign Up{% endblock %}
 
 {% block bodyContent %}
-<div class="line-header">Sign-up</div> 
+<div class="line-header">Sign-up <span class="smalltxt">&nbsp; (Have account? <a href="{% url login %}">Log in!</a>)</span></div> 
 
-<form action="{% url signup %}" method="post">
+<div>Before you can pitch a project or offer to help, you have to create an account. That way, team members can get in touch with each other. (Don't worry! We won't do anything evil with your information.)</div> <br>
 
-	{% for field in form %}
+<form action="{{target}}" method="post">
+
+	{% for field in form1 %}
+	{% include "hackathon/includes/field.html" %}
+	{% endfor %}
+
+	{% for field in form2 %}
 	{% include "hackathon/includes/field.html" %}
 	{% endfor %}
 

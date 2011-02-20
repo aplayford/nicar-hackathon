@@ -1,6 +1,6 @@
-	<div class="field" {% if field.hidden %}style="display: none;"{% endif %}>
+	<div class="field {% if field.errors %}error{% endif %}" {% if field.is_hidden %}style="display: none;"{% endif %}>
 		<strong>{{field.label_tag}}</strong> <br>
 		{{field}} <br>
-		{% if field.help_text %}<i>{{field.help_text}}</i>{% endif %}
-		{% if field.errors %}{{field.errors}}{% endif %}
+		{% if field.help_text %}<i>{{field.help_text|safe}}</i>{% endif %}
+		{% if field.errors %}<span class="error_txt">{{field.errors}}</span>{% endif %}
 	</div>

@@ -2,7 +2,7 @@
 
 {% block bodyContent %}
 
-<div class="line-header">Login</div> 
+<div class="line-header">Login <span class="smalltxt">&nbsp; (No account? <a href="{% url signup %}">Sign up!</a>)</span></div>
 
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>

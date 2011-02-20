@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from hackathon.models import Person, Project, ProjectNeed, ProjectStaff
-from hackathon.forms import ProjectForm, PersonForm
+from hackathon.forms import ProjectForm, PersonForm, UserForm
 
 def check_login(req):
     if req.user.is_authenticated():
@@ -55,20 +55,29 @@ def signup(request):
     varsContext = {}
     varsContext.update(check_login(request))
 
-    if request.method == 'POST':
-        form = PersonForm(request.POST)
-        if form.is_valid():
-            form.save()
-            HttpResponseRedirect(reverse('signup_success'))
-    else:
-        form = PersonForm()
-    
-    varsContext['form'] = form
-
     if 'next' in request.GET and request.GET['next']:
         varsContext['next'] = request.GET['next']
+        varsContext['target'] = "%s?next=%s" % (reverse('signup'), varsContext['next'])
     else:
         varsContext['next'] = reverse('index')
+        varsContext['target'] = reverse('signup')
+
+    print(varsContext['next'])
+
+    if request.method == 'POST':
+        form1 = UserForm(request.POST)
+        form2 = PersonForm(request.POST)
+        if form1.is_valid() and form2.is_valid():
+            usr = form1.save()
+            form2.save(usr)
+            print("Sending to %s" % varsContext['next'])
+            HttpResponseRedirect(varsContext['next'])
+    else:
+        form1 = UserForm()
+        form2 = PersonForm()
+    
+    varsContext['form1'] = form1
+    varsContext['form2'] = form2
 
     return render_to_response("hackathon/signup.html", varsContext,
                                     context_instance=RequestContext(request))
