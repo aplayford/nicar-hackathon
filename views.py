@@ -62,16 +62,13 @@ def signup(request):
         varsContext['next'] = reverse('index')
         varsContext['target'] = reverse('signup')
 
-    print(varsContext['next'])
-
     if request.method == 'POST':
         form1 = UserForm(request.POST)
         form2 = PersonForm(request.POST)
         if form1.is_valid() and form2.is_valid():
             usr = form1.save()
             form2.save(usr)
-            print("Sending to %s" % varsContext['next'])
-            HttpResponseRedirect(varsContext['next'])
+            return HttpResponseRedirect(varsContext['next'])
     else:
         form1 = UserForm()
         form2 = PersonForm()
