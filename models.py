@@ -8,8 +8,8 @@ class SluggedModel(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            if hasattr(self, slug_text):
-                slug_text = self.slug_text
+            if hasattr(self, "slug_text"):
+                slug_text = self.slug_text()
             else:
                 slug_text = unicode(self)
         
@@ -30,7 +30,7 @@ class Person(SluggedModel):
     roles_willing = models.ManyToManyField('RoleChoice', blank=True)
 
     email = models.EmailField()
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(blank=True)
 
     def __unicode__(self):
         return u"%s" % self.name
@@ -51,6 +51,9 @@ class Project(SluggedModel):
 
     def __unicode__(self):
         return u"%s" % self.name
+    
+    def leader(self):
+        return self.staff.get(team_leader=True)
     
     @models.permalink
     def get_absolute_url(self):
@@ -84,6 +87,7 @@ class ProjectStaff(models.Model):
 
     class Meta:
         verbose_name_plural = "project staff"
+        unique_together = ('team_leader', 'project',)
 
 ######################
 ## Helper models    ##
