@@ -1,7 +1,9 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.forms.models import inlineformset_factory
 
-from hackathon.models import Project, Person
+from hackathon.models import Person, Project, ProjectNeed, ProjectStaff
+from hackathon.forms import ProjectForm, PersonForm
 
 def check_login(req):
     if req.user.is_authenticated():
@@ -24,7 +26,6 @@ def index(request):
     varsContext["people"] = Person.objects.all()
 
     return render_to_response("hackathon/index.html", varsContext, context_instance=RequestContext(request))
-
 
 def person(request, slugPerson):
     varsContext = {}
@@ -52,4 +53,40 @@ def signup(request):
     varsContext = {}
     varsContext.update(check_login(request))
 
-    return render_to_response("hackathon/signup.html", varsContext, context_instance=RequestContext(request))
+    if request.method == 'POST':
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = PersonForm()
+    
+    varsContext['form'] = form
+
+    return render_to_response("hackathon/signup.html", varsContext,
+                                    context_instance=RequestContext(request))
+
+def project_submit(request):
+    StaffFormset = inlineformset_factory(Project, ProjectStaff)
+    NeedsFormset = inlineformset_factory(Project, ProjectNeed)
+    
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        project_staff = StaffFormset(request.POST, request.FILES)
+        project_needs = NeedsFormset(request.POST, request.FILES)
+        if form.is_valid() and project_staff.is_valid() and project_needs.is_valid():
+            project_staff.save()
+            project_needs.save()
+            form.is_valid()
+    else:
+        form = ProjectForm()
+        project_staff = StaffFormset()
+        project_needs = NeedsFormset()
+    
+    varsContext = {
+        "form": form,
+        "project_needs": project_needs,
+        "project_staff": project_staff
+    }
+
+    return render_to_response("hackathon/project_submit.html", varsContext,
+                                context_instance=RequestContext(request))

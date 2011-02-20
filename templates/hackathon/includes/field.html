@@ -1,0 +1,6 @@
+	<div class="field">
+		<strong>{{field.label_tag}}</strong> <br>
+		{{field}} <br>
+		{% if field.help_text %}<i>{{field.help_text}}</i>{% endif %}
+		{% if field.errors %}{{field.errors}}{% endif %}
+	</div>

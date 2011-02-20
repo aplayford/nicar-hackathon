@@ -1,0 +1,34 @@
+{% extends "hackathon/base.html" %}
+
+{% block pageTitle %}NICAR Hackathon Project Sign-up{% endblock %}
+
+{% block bodyContent %}
+
+<div class="line-header">Project Sign-up</div> 
+
+<form action="{% url signup %}" method="post">
+	{% for field in form %}
+		{% include "hackathon/includes/field.html" %}
+	{% endfor %}
+
+	<b>PROJECT STAFF</b>
+	{% for form in project_staff.forms %}
+		{% for field in form %}
+		{% include "hackathon/includes/field.html" %}
+		{% endfor %}
+	{% endfor %}
+
+	<b>PROJECT NEEDS</b>
+	{% for form in project_needs.forms %}
+		{% for field in form %}
+		{% include "hackathon/includes/field.html" %}
+		{% endfor %}
+	{% endfor %}
+
+	{% csrf_token %}
+
+	<input type="submit" value="Submit" />
+
+</form>
+
+{% endblock bodyContent %}
