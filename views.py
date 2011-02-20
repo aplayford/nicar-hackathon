@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.forms.models import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth import authenticate, login
 
 from hackathon.models import Person, Project, ProjectNeed, ProjectStaff
 from hackathon.forms import ProjectForm, PersonForm, UserForm
@@ -68,6 +69,9 @@ def signup(request):
         if form1.is_valid() and form2.is_valid():
             usr = form1.save()
             form2.save(usr)
+
+            usr = authenticate(username=usr.username, password=form1.cleaned_data['password1'])
+            login(request, usr)
             return HttpResponseRedirect(varsContext['next'])
     else:
         form1 = UserForm()
