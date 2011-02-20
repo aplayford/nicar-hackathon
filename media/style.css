@@ -34,7 +34,6 @@ ul li {margin:5px 0 8px;list-style-type:square;}
  * Hackathon-specific styles *
  *****************************/
 
-.field {
-	margin-bottom: 5px;
-}
-
+.field { margin-bottom: 5px; }
+.login-wrap { text-align: right; background-color: #FFBF40; height: 15px; }
+.login { padding-top: 15px;	padding: 10px; float: right; background-color: #FFCF50; }

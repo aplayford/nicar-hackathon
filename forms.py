@@ -16,7 +16,6 @@ class PersonForm(forms.ModelForm):
 	def save(*args, **kwargs):
 		m = super(PersonForm, *args, **kwargs)
 
-
 	class Meta:
 		model = Person
 		exclude = ('slug', 'user',)

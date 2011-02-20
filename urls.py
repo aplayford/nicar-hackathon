@@ -4,12 +4,13 @@ urlpatterns = patterns('hackathon.views',
     url(r'^$', 'index', name="index"),
     url(r'^person/(?P<slugPerson>[\w-]+)/$', 'person', name="person"),
     url(r'^project/(?P<slugProject>[\w-]+)/$', 'project', name="project"),
-    url(r'^project_submit/', 'project_submit', name="project-submit"),
+    
+    url(r'^submit_project/$', 'submit_project', name="submit-project"),
+    url(r'^submit_project/success/$', 'submit_project_success', name="submit-project-success"),
 
-    # Haven't looked at yet, but these are placeholders...
-    url(r'^project_sign_up/$', 'project_sign_up', name="project_sign_up"),
     url(r'^signup/$', 'signup', name="signup"),
+    url(r'^signup/success/$', 'signup_success', name="signup-success"),
 ) + patterns('',
 	url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'hackathon/login.html'}, name="login"),
-	url(r'^logout/$', 'django.contrib.auth.views.logout', {}, name="logout"),
+	url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name="logout"),
 )

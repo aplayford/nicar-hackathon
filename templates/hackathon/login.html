@@ -22,7 +22,7 @@
 </div>
 
 <input type="submit" value="Log in" />
-<input type="hidden" name="next" value="{{ next }}" />
+<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}/{% endif %}" />
 </form>
 
 {% endblock %}
