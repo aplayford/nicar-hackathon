@@ -10,7 +10,7 @@
 
 {% for pr in projects %} <h2><a href="{{ pr.get_absolute_url }}">{{ pr.name }}</a></h2>
 <div><span class="date"> <strong>Team: </strong>{% for staffs in pr.staff.all %}{% if forloop.first %}{% else %}, {% endif %}{{ staffs.name }}{% endfor %}</span><br />
-    {{ pr.short_description }}</div> 
+    {{ pr.description|truncatewords:150 }}</div> 
     <div class="needs"><strong>Still needs: {% if forloop.first %}{% else %}, {% endif %}{% for need in pr.needs.all %}{{need}}, {% endfor %}</strong>
     {% endfor %}
     
