@@ -157,7 +157,10 @@ def submit_project(request, edit_instance=None):
     NeedsFormset = inlineformset_factory(Project, ProjectNeed)
     
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        if edit_instance is None:
+            form = ProjectForm(request.POST)
+        else:
+            form = ProjectForm(request.POST, instance=edit_instance)
         if form.is_valid():
             proj = form.save()
             
@@ -171,14 +174,17 @@ def submit_project(request, edit_instance=None):
                     varsContext['next'] = proj.get_absolute_url()
                 return HttpResponseRedirect(varsContext['next'])
         else:
+            print("init else1")
             project_staff = StaffFormset(request.POST, prefix="staff")
             project_needs = NeedsFormset(request.POST, prefix="needs")
     else:
         if edit_instance is None:
+            print("init none1")
             form = ProjectForm()
             project_staff = StaffFormset(prefix="staff")
             project_needs = NeedsFormset(prefix="needs")
         else:
+            print("init else2")
             form = ProjectForm(instance=edit_instance)
             project_staff = StaffFormset(prefix="staff", instance=edit_instance)
             project_needs = NeedsFormset(prefix="needs", instance=edit_instance)

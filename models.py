@@ -21,7 +21,7 @@ class SluggedModel(models.Model):
         abstract = True
 
 class Person(SluggedModel):
-    user = models.OneToOneField('auth.User')
+    user = models.OneToOneField('auth.User', blank=True)
     name = models.CharField(max_length=100)
     bio = models.TextField(blank=True)
     
