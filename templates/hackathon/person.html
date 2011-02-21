@@ -3,19 +3,31 @@
 {% block pageTitle %}NICAR Hackathon Project List{% endblock %}
 
 {% block bodyContent %}
-	<div class="line-header">{{ me.name }} {% if can_edit %}<span class="smalltxt"><a href="{{me.get_edit_url}}">Click to edit</a></span>{% endif %}</div> 
+	<div class="line-header">{{ me.name }} {% if can_edit %}<span class="smalltxt ctl"><a href="{{me.get_edit_url}}">Click to edit</a></span>{% endif %}</div> 
 	
-	<div>{{ me.bio }}</div>
+	<div class="description">{{ me.bio|linebreaks }}</div>
 
 	<br />
 	
 	{% if me.website %}<div class="url"><strong>Website: </strong><a href="{{ me.website }}">{{ me.website }}</a></div>{% endif %}
 
 	{% if me.skills_summary %}<div class="has"><strong>Technical skills: </strong>{{ me.skills_summary }}</div>{% endif %}
-	<div class="projects"><strong>Project(s): </strong>{% for projectstaff in person.projects.all %} <a href="projectstaff.project.get_absolute_url">{{projectstaff.project}}</a>{% if not forloop.last %}, {% endif %}{% empty %} Not yet signed up for any.{% endfor %}</div>
+
+	<div class="projects">
+		<strong>Project(s): </strong>
+		{% for projectstaff in me.projects.all %}
+			{% with projectstaff.project as project %}
+			<a href="{{ project.get_absolute_url }}">{{project}}</a>{% if not forloop.last %}, {% endif %}
+			{% endwith %}
+		{% empty %} Not yet signed up for any.
+		{% endfor %}
+	</div>
 
 	<br />
 
-	<div class="">Want to recruit me? <a href="email/">Click here</a> to e-mail {{ me.name }}.</div>
+	Want to recruit me? <a href="">E-mail {{me.name}}</a>.
+
+	<div class="action"><a href="#">Send an e-mail</a></div>
+	<div class="clear"></div>
  
 {% endblock bodyContent %}

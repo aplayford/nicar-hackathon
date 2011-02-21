@@ -3,6 +3,10 @@
 {% block pageTitle %}NICAR Hackathon Project List{% endblock %}
 
 {% block bodyContent %}
+	<h2>Welcome to the ProductPitcher</h2>
+
+	<div>This app helps bring people together to work on ideas during hackathons. Here you can pitch a goal, whether it's refactoring old code to reach a new milestone or spending a sleepless night building something new. If you haven't yet, feel free to <a href="{% url signup %}">sign-up</a> or <a href="{% url login %}">login</a> if you need to. </div><br />
+
 	<div class="line-header">
 		<a href="{% url submit-project %}">Pitch a project</a> | 
 		{% if not logged_in %}
@@ -11,10 +15,6 @@
 			Browse proposals
 		{% endif %}
 	</div>
-
-	<h2>Welcome to the ProductPitcher</h2>
-
-	<div>This app helps bring people together to work on ideas during hackathons. Here you can pitch a goal, whether it's refactoring old code to reach a new milestone or spending a sleepless night building something new. If you haven't yet, feel free to <a href="{% url signup %}">sign-up</a> or <a href="{% url login %}">login</a> if you need to. </div><br />
 
 	<div class="line-header">Projects:</div>
 
@@ -27,6 +27,8 @@
     	{% if pr.needs.count %}<div class="needs">
 			<strong>Still looking for: {% for need in pr.needs.all %}{{need}}{% if not forloop.last %},{% endif %}{% endfor %}</strong>
 		</div>{% endif %}
+	{% empty %}
+		<div>No projects proposed yet. <a href="{% url submit-project %}">Be the first!</a></div>
     {% endfor %}
 
     <div class="line-header">Participants:</div>
@@ -34,6 +36,8 @@
 		<div><span class="date">
 			<a href="{{ p.get_absolute_url}}">{{ p.name }}{% if not forloop.last %}, {% endif %}</a>
 		</span></div>
+	{% empty %}
+		<div>No participants registered. <a href="{% url signup %}">Start the trend!</a></div>
 	{% endfor %}
 
 {% endblock bodyContent %}

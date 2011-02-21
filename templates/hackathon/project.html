@@ -3,9 +3,9 @@
 {% block pageTitle %}NICAR Hackathon Project List{% endblock %}
 
 {% block bodyContent %}
-	<div class="line-header">{{ me.name }} {% if can_edit %}<span class="smalltxt"><a href="{{me.get_edit_url}}">Click to edit</a></span>{% endif %}</div>
+	<div class="line-header">{{ me.name }} {% if can_edit %}<span class="smalltxt ctl"><a href="{{me.get_edit_url}}">Click to edit</a></span>{% endif %}</div>
 
-	<div>{{ me.description }}</div>
+	<div class="description">{{ me.description|linebreaks }}</div>
 
 	<br />
 
@@ -15,9 +15,7 @@
 
 	<br />
 
-	<div class="has"><strong>Project organizer:</strong> {% if me.leader %}{{ me.leader }}{% else %}(none assigned){% endif %}</div>
-
-	<div class="team"><strong>Team: </strong>{% for staffs in me.staff.all %}<a href="{{ staffs.get_absolute_url}}">{{ staffs.name }}{% if forloop.first %}{% else %}, {% endif %}</a>{% endfor %}</div>
+	<span class="team"><strong>Team: </strong>{% for staff in me.staff.all %}<a href="{{staff.get_absolute_url}}">{{ staff }}</a>{% if staff.team_leader %} (organizer){% endif %}{% if not forloop.last%}, {% endif %}{% endfor %}</span><br />
 
 	<br />
 
@@ -31,6 +29,7 @@
 
 	<br />
 
-	<div class="">Ask to join this team.</div>
+	<div class="action"><a href="#">Ask to join this team.</a></div>
+	<div class="clear"></div>
  
 {% endblock bodyContent %}
