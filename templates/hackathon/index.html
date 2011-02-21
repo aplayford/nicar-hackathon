@@ -18,7 +18,7 @@
     
 
 <h2>Volunteers so far</h2>
-<div><span class ="date">{% if not forloop.last %},{% endif %}{% for p in people %}<a href="{{ p.get_absolute_url}}">{{ p.name }}</a>{% endfor %}</span></div>
+<div><span class ="date">{% for p in people %}<a href="{{ p.get_absolute_url}}">{{ p.name }}{% if not forloop.last %}, {% endif %}</a>{% endfor %}</span></div>
 
 </div> 
 

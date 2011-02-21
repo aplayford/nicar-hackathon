@@ -33,14 +33,14 @@
 		{% if form.repo.errors %}<div class="error_txt">{{form.repo.errors}}</div>{% endif %}
 	</div>
 	
-	<b>PROJECT STAFF</b>
+	<div class="">PROJECT STAFF</div>
 	{% for form in project_staff.forms %}
 		{% for field in form %}
 		{% include "hackathon/includes/field.html" %}
 		{% endfor %}
 	{% endfor %}
 	{{project_staff.management_form}}
-	
+
 	<b>PROJECT NEEDS</b>
 	{% for form in project_needs.forms %}
 		{% for field in form %}

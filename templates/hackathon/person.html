@@ -3,11 +3,11 @@
 {% block pageTitle %}NICAR Hackathon Project List{% endblock %}
 
 {% block bodyContent %}
-<div class="line-header">{{ me.name }}</div> 
+<div class="line-header">{{ me.name }} {% if can_edit %}<span class="smalltxt"><a href="{{me.get_edit_url}}">Click to edit</a></span>{% endif %}</div> 
 	{{ me.bio }}</div>
 {% if me.website %}<div class="url"><strong>Website: </strong><a href="{{ me.website }}">{{ me.website }}</a></div>{% endif %}
 <div class="has"><strong>Skill type: </strong>{{ me.skills_summary }}</div>
-<div class="projects"><strong>Project(s): </strong>{% for projectstaff in person.projects.all %}{{projectstaff.project}} {% endfor %}{% endfor %}</div>
+<div class="projects"><strong>Project(s): </strong>{% for projectstaff in person.projects.all %}{{projectstaff.project}} {% endfor %}</div>
 <div class="line-header">If no projects, <a href="mailto:{{ me.email }}">click here</a> to email {{ me.name }}</div>
 </div>
 

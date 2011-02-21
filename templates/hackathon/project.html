@@ -3,7 +3,9 @@
 {% block pageTitle %}NICAR Hackathon Project List{% endblock %}
 
 {% block bodyContent %}
-<div class="line-header">{{ me.name }}</div> 
+
+
+<div class="line-header">{{ me.name }} {% if can_edit %}<span class="smalltxt"><a href="{{me.get_edit_url}}">Click to edit</a></span>{% endif %}</div> 
 	{{ me.long_description }}</div>
 <div class="url"><strong>Link: </strong><a href="http://www.blahblahblah.com">blahblahblah.com</a></div> 
 <div class="has"><strong>Leader: </strong>{{ me.leader }}</div>

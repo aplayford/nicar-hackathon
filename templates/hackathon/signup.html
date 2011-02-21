@@ -9,9 +9,11 @@
 
 <form action="{{target}}" method="post">
 
+	{% if form1 %}
 	{% for field in form1 %}
 	{% include "hackathon/includes/field.html" %}
 	{% endfor %}
+	{% endif %}
 
 	{% for field in form2 %}
 	{% include "hackathon/includes/field.html" %}

@@ -30,20 +30,26 @@ class UserForm(UserCreationForm):
 
 class PersonForm(forms.ModelForm):
 	def save(self, user, *args, **kwargs):
-		pass_args = uncommit_copy(kwargs)
+		print("save save save start.")
+		if user is not None:
+			pass_args = uncommit_copy(kwargs)
 
-		me = super(PersonForm, self).save(*args, **pass_args)
-		me.user = user
+			me = super(PersonForm, self).save(*args, **pass_args)
+			me.user = user
 
-		if kwargs.get('commit', True):
-			me.save()
-		return me
+			if kwargs.get('commit', True):
+				me.save()
+			return me
+		else:
+			print("do save mr. save sir.")
+			return super(PersonForm, self).save(*args, **kwargs)
 
 	class Meta:
 		model = Person
-		fields = ('name', 'bio', 'skills_summary', 'website', 'roles_willing')
+		fields = ('name', 'bio', 'skills_summary', 'website', 'roles_willing', 'user')
 		widgets = {
-			'roles_willing': forms.CheckboxSelectMultiple()
+			'roles_willing': forms.CheckboxSelectMultiple(),
+			'user': forms.HiddenInput(),
 		}
 
 def uncommit_copy(kwargs):

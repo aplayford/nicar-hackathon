@@ -3,7 +3,7 @@ from django.contrib.localflavor.us.models import PhoneNumberField
 from django.template.defaultfilters import slugify
 
 class SluggedModel(models.Model):
-    slug = models.SlugField(max_length=50, blank=True, unique=True,
+    slug = models.SlugField(max_length=50, blank=True,
                             help_text="If you leave this blank, it will be filled in with magic!")
 
     def save(self, *args, **kwargs):
@@ -40,7 +40,11 @@ class Person(SluggedModel):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('person', [], {'slugPerson': self.slug})
+        return ('person', [], {'slugPerson': self.slug, 'id': self.id})
+
+    @models.permalink
+    def get_edit_url(self):
+        return ('edit-person', [], {'slugPerson': self.slug, 'id': self.id})
 
 class Project(SluggedModel):
     name = models.CharField(max_length=150)
@@ -52,11 +56,18 @@ class Project(SluggedModel):
         return u"%s" % self.name
     
     def leader(self):
-        return self.staff.get(team_leader=True)
+        try:
+            return self.staff.get(team_leader=True)
+        except ProjectStaff.DoesNotExist:
+            return None
     
     @models.permalink
     def get_absolute_url(self):
-        return ('project', [], {'slugProject': self.slug})
+        return ('project', [], {'slugProject': self.slug, 'id': self.id})
+    
+    @models.permalink
+    def get_edit_url(self):
+        return ('edit-project', [], {'slugProject': self.slug, 'id': self.id})
 
 
 ###########$###########
