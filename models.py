@@ -29,7 +29,6 @@ class Person(SluggedModel):
 
     roles_willing = models.ManyToManyField('RoleChoice', blank=True, verbose_name="willing to help with:")
 
-    email = models.EmailField("e-mail", blank=True) # Eliminate on next database change.
     website = models.URLField(blank=True)
 
     def __unicode__(self):
