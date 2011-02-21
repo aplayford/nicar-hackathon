@@ -10,9 +10,6 @@ class ProjectForm(forms.ModelForm):
 	class Meta:
 		model = Project
 		exclude = ('slug',)
-		widgets = {
-			'characteristics': forms.CheckboxSelectMultiple()
-		}
 
 class UserForm(UserCreationForm):
 	email = forms.EmailField(label="E-mail", max_length=75, required=True)
