@@ -11,8 +11,8 @@
 <form method="post" action="{% url django.contrib.auth.views.login %}">
 {% csrf_token %}
 
-<div class="email">
-    <strong>E-mail</strong> <br>
+<div class="username">
+    <strong>Username</strong> <br>
     {{ form.username }}
 </div>
 

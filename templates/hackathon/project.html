@@ -3,18 +3,34 @@
 {% block pageTitle %}NICAR Hackathon Project List{% endblock %}
 
 {% block bodyContent %}
+	<div class="line-header">{{ me.name }} {% if can_edit %}<span class="smalltxt"><a href="{{me.get_edit_url}}">Click to edit</a></span>{% endif %}</div>
 
+	<div>{{ me.description }}</div>
 
-<div class="line-header">{{ me.name }} {% if can_edit %}<span class="smalltxt"><a href="{{me.get_edit_url}}">Click to edit</a></span>{% endif %}</div> 
-	{{ me.long_description }}</div>
-<div class="url"><strong>Link: </strong><a href="http://www.blahblahblah.com">blahblahblah.com</a></div> 
-<div class="has"><strong>Leader: </strong>{{ me.leader }}</div>
-<div class="team"><strong>Team: </strong>{% for staffs in me.staff.all %}<a href="{{ staffs.get_absolute_url}}">{{ staffs.name }}{% if forloop.first %}{% else %}, {% endif %}</a>{% endfor %}</div>
-<div class="needs"><strong>Still needs:</strong> {% for need in me.needs.all %}{% if forloop.first %}{% else %}, {% endif %}{{need}}{% endfor %}</div>
-<div class="line-header">Join this team</div>
-</div>
+	<br />
 
+	{% if me.website %}<div class="url"><strong>Project home: </strong><a href="{{me.website}}">{{me.website}}</a></div>{% endif %}
 
-</div> 
+	{% if me.repo %}<div class="url"><strong>Source code repository: </strong><a href="{{me.repo}}">{{me.website}}</a></div>{% endif %}
+
+	<br />
+
+	<div class="has"><strong>Project organizer:</strong> {% if me.leader %}{{ me.leader }}{% else %}(none assigned){% endif %}</div>
+
+	<div class="team"><strong>Team: </strong>{% for staffs in me.staff.all %}<a href="{{ staffs.get_absolute_url}}">{{ staffs.name }}{% if forloop.first %}{% else %}, {% endif %}</a>{% endfor %}</div>
+
+	<br />
+
+	<div class="needs"><strong>Staffing needs:</strong>
+		{% if me.needs.count %}
+			{% for need in me.needs.all %}{% if forloop.first %}{% else %}, {% endif %}{{need}}{% endfor %}
+		{% else %}
+			This project is not currently seeking additional staffing.
+		{% endif %}
+	</div>
+
+	<br />
+
+	<div class="">Ask to join this team.</div>
  
 {% endblock bodyContent %}

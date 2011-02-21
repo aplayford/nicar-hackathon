@@ -3,23 +3,37 @@
 {% block pageTitle %}NICAR Hackathon Project List{% endblock %}
 
 {% block bodyContent %}
-<div class="line-header"><a href="{% url submit-project %}">Pitch a project</a> | 
-{% if not logged_in %}<a href="{% url signup %}">Volunteer to help</a>
-{% else %}Browse proposals{% endif %}</div> 
+	<div class="line-header">
+		<a href="{% url submit-project %}">Pitch a project</a> | 
+		{% if not logged_in %}
+			<a href="{% url signup %}">Volunteer to help</a>
+		{% else %}
+			Browse proposals
+		{% endif %}
+	</div>
 
-<h2>Welcome to the ProductPitcher</h2>
-<div>This app helps bring people together to work on ideas during hackathons. Here you can pitch a goal, whether it's refactoring old code to reach a new milestone or spending a sleepless night building something new. If you haven't yet, feel free to <a href="{% url signup %}">sign-up</a> or <a href="{% url login %}">login</a> if you need to. </div><br />
-<div class="line-header">Projects</div>
-{% for pr in projects %} <h2><a href="{{ pr.get_absolute_url }}">{{ pr.name }}</a></h2>
-<div><span class="date"> <strong>Team: </strong>{% for staff in pr.staff.all %}{{ staff.name }}{% if not forloop.last%}, {% endif %}{% endfor %}</span><br />
-    {{ pr.description|truncatewords:150 }}</div>
-    <div class="needs"><strong>Still need: {% for need in pr.needs.all %}{{need}}{% if not forloop.last %},{% endif %}{% endfor %}</strong>
+	<h2>Welcome to the ProductPitcher</h2>
+
+	<div>This app helps bring people together to work on ideas during hackathons. Here you can pitch a goal, whether it's refactoring old code to reach a new milestone or spending a sleepless night building something new. If you haven't yet, feel free to <a href="{% url signup %}">sign-up</a> or <a href="{% url login %}">login</a> if you need to. </div><br />
+
+	<div class="line-header">Projects:</div>
+
+	{% for pr in projects %}
+		<h2><a href="{{ pr.get_absolute_url }}">{{ pr.name }}</a></h2>
+		<div>
+			<span class="date"><strong>Team: </strong>{% for staff in pr.staff.all %}<a href="{{staff.get_absolute_url}}">{{ staff }}</a>{% if staff.team_leader %} (organizer){% endif %}{% if not forloop.last%}, {% endif %}{% endfor %}</span><br />
+    		{{ pr.description|truncatewords:150 }}
+    	</div>
+    	{% if pr.needs.count %}<div class="needs">
+			<strong>Still looking for: {% for need in pr.needs.all %}{{need}}{% if not forloop.last %},{% endif %}{% endfor %}</strong>
+		</div>{% endif %}
     {% endfor %}
-    
 
-<h2>Volunteers so far</h2>
-<div><span class ="date">{% for p in people %}<a href="{{ p.get_absolute_url}}">{{ p.name }}{% if not forloop.last %}, {% endif %}</a>{% endfor %}</span></div>
-
-</div> 
+    <div class="line-header">Participants:</div>
+	{% for p in people %}
+		<div><span class="date">
+			<a href="{{ p.get_absolute_url}}">{{ p.name }}{% if not forloop.last %}, {% endif %}</a>
+		</span></div>
+	{% endfor %}
 
 {% endblock bodyContent %}

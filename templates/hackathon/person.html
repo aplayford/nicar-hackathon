@@ -3,15 +3,19 @@
 {% block pageTitle %}NICAR Hackathon Project List{% endblock %}
 
 {% block bodyContent %}
-<div class="line-header">{{ me.name }} {% if can_edit %}<span class="smalltxt"><a href="{{me.get_edit_url}}">Click to edit</a></span>{% endif %}</div> 
-	{{ me.bio }}</div>
-{% if me.website %}<div class="url"><strong>Website: </strong><a href="{{ me.website }}">{{ me.website }}</a></div>{% endif %}
-<div class="has"><strong>Skill type: </strong>{{ me.skills_summary }}</div>
-<div class="projects"><strong>Project(s): </strong>{% for projectstaff in person.projects.all %}{{projectstaff.project}} {% endfor %}</div>
-<div class="line-header">If no projects, <a href="mailto:{{ me.email }}">click here</a> to email {{ me.name }}</div>
-</div>
+	<div class="line-header">{{ me.name }} {% if can_edit %}<span class="smalltxt"><a href="{{me.get_edit_url}}">Click to edit</a></span>{% endif %}</div> 
+	
+	<div>{{ me.bio }}</div>
 
+	<br />
+	
+	{% if me.website %}<div class="url"><strong>Website: </strong><a href="{{ me.website }}">{{ me.website }}</a></div>{% endif %}
 
-</div> 
+	{% if me.skills_summary %}<div class="has"><strong>Technical skills: </strong>{{ me.skills_summary }}</div>{% endif %}
+	<div class="projects"><strong>Project(s): </strong>{% for projectstaff in person.projects.all %} <a href="projectstaff.project.get_absolute_url">{{projectstaff.project}}</a>{% if not forloop.last %}, {% endif %}{% empty %} Not yet signed up for any.{% endfor %}</div>
+
+	<br />
+
+	<div class="">Want to recruit me? <a href="email/">Click here</a> to e-mail {{ me.name }}.</div>
  
 {% endblock bodyContent %}
