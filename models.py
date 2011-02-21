@@ -85,7 +85,7 @@ class ProjectNeed(models.Model):
 class ProjectStaff(models.Model):
     project = models.ForeignKey("Project", related_name="staff")
     person = models.ForeignKey("Person", related_name="projects")
-    roles = models.ManyToManyField('RoleChoice', blank=True)
+    #roles = models.ManyToManyField('RoleChoice', blank=True)
     team_leader = models.BooleanField()
 
     def __unicode__(self):
