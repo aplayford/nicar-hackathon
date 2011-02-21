@@ -54,11 +54,8 @@ class Project(SluggedModel):
     def __unicode__(self):
         return u"%s" % self.name
     
-    def leader(self):
-        try:
-            return self.staff.get(team_leader=True)
-        except ProjectStaff.DoesNotExist:
-            return None
+    def leaders(self):
+        return self.staff.filter(project_leader=True).values_list(flat=True)
     
     @models.permalink
     def get_absolute_url(self):
