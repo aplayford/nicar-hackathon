@@ -5,7 +5,12 @@
 {% block bodyContent %}
 	<h2>Welcome to the ProductPitcher</h2>
 
-	<div>This app helps bring people together to work on ideas during hackathons. Here you can pitch a goal, whether it's refactoring old code to reach a new milestone or spending a sleepless night building something new. If you haven't yet, feel free to <a href="{% url signup %}">sign-up</a> or <a href="{% url login %}">login</a> if you need to. </div><br />
+	<div class="description">
+		<p>This app helps bring people together to work on ideas during hackathons. Here you can pitch a goal, whether it's refactoring old code to reach a new milestone or spending a sleepless night building something new.</p>
+		<p>If you haven't yet, feel free to <a href="{% url signup %}">sign-up</a> or <a href="{% url login %}">login</a> if you need to.</p>
+	</div>
+
+	<br />
 
 	<div class="line-header">
 		<a href="{% url submit-project %}">Pitch a project</a> | 
