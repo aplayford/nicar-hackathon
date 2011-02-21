@@ -11,9 +11,9 @@
 <div>This app helps bring people together to work on ideas during hackathons. Here you can pitch a goal, whether it's refactoring old code to reach a new milestone or spending a sleepless night building something new. If you haven't yet, feel free to <a href="{% url signup %}">sign-up</a> or <a href="{% url login %}">login</a> if you need to. </div><br />
 <div class="line-header">Projects</div>
 {% for pr in projects %} <h2><a href="{{ pr.get_absolute_url }}">{{ pr.name }}</a></h2>
-<div><span class="date"> <strong>Team: </strong>{% for staffs in pr.staff.all %}{% if forloop.first %}{% else %}, {% endif %}{{ staffs.name }}{% endfor %}</span><br />
+<div><span class="date"> <strong>Team: </strong>{% for staff in pr.staff.all %}{{ staff.name }}{% if not forloop.last%}, {% endif %}{% endfor %}</span><br />
     {{ pr.description|truncatewords:150 }}</div>
-    <div class="needs"><strong>Still needs: {% if not forloop.last %},{% endif %}{% for need in pr.needs.all %}{{need}}, {% endfor %}</strong>
+    <div class="needs"><strong>Still need: {% for need in pr.needs.all %}{{need}}{% if not forloop.last %},{% endif %}{% endfor %}</strong>
     {% endfor %}
     
 
