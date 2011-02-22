@@ -1,8 +1,8 @@
-{{from}} sent you a note through nicar.adamplayford.com:
+{{from|safe}} sent you a note through nicar.adamplayford.com:
 =======================
 
 
-{{msg.text}}
+{{msg.text|safe}}
 
 
 
