@@ -176,7 +176,6 @@ class ProjectStaff(models.Model):
 
     class Meta:
         verbose_name_plural = "project staff"
-        unique_together = ('team_leader', 'project',)
     
     def get_absolute_url(self):
         return self.person.get_absolute_url()
