@@ -1,6 +1,6 @@
 An automated note from nicar.adamplayford.com:
 
-Sorry to hear, but your application to join project "{{project}}" was rejected. Don't feel bad -- it's probably not you. That spot likely just filled before you asked. Or maybe the project's needs changed.
+Sorry to hear, but your application to join project "{{project}}" was rejected. Don't feel bad -- it's probably not you. That spot likely was just filled before you asked. Or maybe the project's needs changed.
 
 Either way, don’t worry! Head back to http://nicar.adamplayford.com; there are going to be many other projects to join.
 

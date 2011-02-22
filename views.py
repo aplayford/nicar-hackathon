@@ -122,7 +122,10 @@ def project_request(request, id, ans=None, go=False):
             if me.project.is_leader(varsContext["user"]):
                 if go:
                     me.queue_response(ans, varsContext["user"])
-                    return HttpResponseRedirect(me.project.get_absolute_url())
+                    if ans=="yes":
+                        return HttpResponseRedirect(me.project.get_edit_url())
+                    elif ans=="no":
+                        return HttpResponseRedirect(me.project.get_absolute_url())
                 else:
                     return render_to_response("hackathon/join_request_response.html", varsContext,
                         context_instance=RequestContext(request))
@@ -257,12 +260,3 @@ def submit_project(request, edit_instance=None):
 
     return render_to_response("hackathon/project_submit.html", varsContext,
                                 context_instance=RequestContext(request))
-
-
-#def submit_project_success(request):
-#    return render_to_response("hackathon/project_submit_success.html", varsContext,
-#                                context_instance=RequestContext(request))
-
-#def signup_success(request):
-#    return render_to_response("hackathon/signup-success.html", varsContext,
-#                                    context_instance=RequestContext(request))
