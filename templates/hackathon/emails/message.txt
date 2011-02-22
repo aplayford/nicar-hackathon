@@ -7,6 +7,6 @@
 
 
 =======================
-To respond, click: {% url message-person id=from.id slugPerson=from.slug %}
+To respond, click: http://nicar.adamplayford.com{% url message-person id=from.id slugPerson=from.slug %}
 
 -- The ProjectPitcher Team
