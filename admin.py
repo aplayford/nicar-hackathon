@@ -29,3 +29,4 @@ admin.site.register(Project, ProjectAdmin)
 ##############
 
 admin.site.register(RoleChoice)
+admin.site.register(JoinProjectRequest)
