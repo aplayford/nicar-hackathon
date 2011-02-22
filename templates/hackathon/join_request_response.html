@@ -5,7 +5,7 @@
 {% block bodyContent %}
 
 	{% ifequal ans "no" %}
-	<h2>REJECT {{me.volunteer}} for {{me.project}}</h2>
+	<b>REJECT {{me.volunteer}} for {{me.project}}</b>
 
 	<div class="description">You're about to reject {{me.volunteer}}'s help for your project, {{me.project}}. Are you sure?</div>
 
@@ -21,7 +21,7 @@
 	{% endifequal %}
 	
 	{% ifequal ans "yes" %}
-	<h2>ACCEPT {{me.volunteer}} for {{me.project}}</h2>
+	<b>ACCEPT {{me.volunteer}} for {{me.project}}</b>
 
 	<div class="description">You're about to accept {{me.volunteer}}'s help for your project, {{me.project}}. Are you sure?</div>
 
