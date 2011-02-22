@@ -1,0 +1,11 @@
+Someone sent you a note through nicar.adamplayford.com:
+
+{{volunteer}} wants to join your project, {{project}}.
+
+{{volunteer}}'s profile: http://nicar.adamplayford.com{{volunteer.get_absolute_url}}
+
+To accept, go here: http://nicar.adamplayford.com{{req.get_yes_url}}
+To decline go here: http://nicar.adamplayford.com{{req.get_no_url}}
+
+Thanks,
+-- The ProjectPitcher Team

@@ -1,0 +1,14 @@
+{% extends "hackathon/base.html" %}
+
+{% block pageTitle %}NICAR Hackathon Project List{% endblock %}
+
+{% block bodyContent %}
+
+	<h2>Volunteering for {{me}}</h2>
+
+	<div class="description">Are you sure you want to volunteer for this project?</div>
+
+	<div class="action"><a href="{% url project-volunteer-success id=me.id slugProject=me.slug %}">Yes!</a></div>
+	
+	<div class="clear"></div>
+{% endblock bodyContent %}

@@ -1,0 +1,23 @@
+{% extends "hackathon/base.html" %}
+
+{% block pageTitle %}NICAR Hackathon Project List{% endblock %}
+
+{% block bodyContent %}
+
+	<h2>{{me.project}}</h2>
+	{% ifequal me.status "YES" %}
+	<div>You've been accepted! You are now a member of <a href="{{me.project.get_absolute_url}}">{{me.project}}.</a></div>
+
+	{% else %}
+	{% ifequal me.status "NO" %}
+	<div>Sorry to hear, but you were rejected from joining {{project}}. It's probably not you: That spot may have been filled before you asked, or the project's needs may have changed.</div>
+
+	<div>But don’t worry! Head back to the <a href="{% url index %}">project list</a>; there will be many other projects to join.</div>
+
+	{% else %}
+
+	<div>You applied to help with {{me.project}}, but no answer yet! Your request is waiting for a team leader's approval. Check back soon.</div>
+
+	{% endifequal %}{% endifequal %}
+
+{% endblock bodyContent %}

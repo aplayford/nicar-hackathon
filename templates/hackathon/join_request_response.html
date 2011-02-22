@@ -1,0 +1,27 @@
+{% extends "hackathon/base.html" %}
+
+{% block pageTitle %}NICAR Hackathon Project List{% endblock %}
+
+{% block bodyContent %}
+
+	{% ifequal ans "no" %}
+	<h2>REJECT</h2>
+
+	<div class="description">You said you want to reject {{me.volunteer}}'s help for your project {{me.project}}. Are you sure?</div>
+
+	<div class="action"><a href="go/">Reject</a></div>
+	
+	<div class="clear"></div>
+	{% endifequal %}
+	
+	{% ifequal ans "yes" %}
+	<h2>ACCEPT</h2>
+
+	<div class="description">You said you want to accept {{me.volunteer}}'s help for your project {{me.project}}. Are you sure?</div>
+
+	<div class="action"><a href="go/">Accept</a></div>
+	
+	<div class="clear"></div>
+	{% endifequal %}
+
+{% endblock bodyContent %}

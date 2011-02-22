@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login
 
-from hackathon.models import Person, Project, ProjectNeed, ProjectStaff
+from hackathon.models import Person, Project, ProjectNeed, ProjectStaff, JoinProjectRequest
 from hackathon.forms import ProjectForm, PersonForm, UserForm
 
 def check_login(req):
@@ -63,7 +63,7 @@ def project(request, slugProject, id, edit=False):
     
     owners = me.leaders()
     if varsContext['logged_in'] and len(owners):
-        can_edit = varsContext["can_edit"] = (varsContext['user'] in owners)
+        can_edit = varsContext["can_edit"] = me.is_leader(varsContext['user'])
     else:
         can_edit = False
 
@@ -76,6 +76,62 @@ def project(request, slugProject, id, edit=False):
             return submit_project(request, edit_instance=varsContext["me"])
 
     return render_to_response("hackathon/project.html", varsContext, context_instance=RequestContext(request))
+
+def project_volunteer(request, slugProject, id, go=False):
+    varsContext = {}
+    varsContext.update(check_login(request))
+
+    me = varsContext["me"] = get_object_or_404(Project, id=id)
+    if varsContext["me"].slug != slugProject:
+        return HttpResponseRedirect(varsContext["me"].get_absolute_url())
+    
+    if not varsContext['logged_in']:
+        return HttpResponseRedirect("%s?next=%s" % (reverse('login'),
+                                    reverse('project-volunteer', kwargs={'id': me.id, "slugProject": me.slug} )))
+    
+    if go:
+        try:
+            obj = JoinProjectRequest.objects.get(project=me, volunteer=varsContext["user"])
+            return HttpResponseRedirect(obj.get_absolute_url())
+        except JoinProjectRequest.DoesNotExist:
+            req = JoinProjectRequest.objects.create(
+                project = me,
+                volunteer = varsContext["user"],
+                do_send = True
+            )
+
+            return render_to_response("hackathon/project_volunteer_success.html", varsContext,
+                context_instance=RequestContext(request))
+    else:
+        return render_to_response("hackathon/project_volunteer.html", varsContext,
+            context_instance=RequestContext(request))
+
+def project_request(request, id, ans=None, go=False):
+    varsContext = {}
+    varsContext.update(check_login(request))
+
+    varsContext['me'] = me = JoinProjectRequest.objects.get(id=id)
+    varsContext["ans"] = ans
+
+    if not varsContext['logged_in']:
+        return HttpResponseRedirect("%s?next=%s" % reverse('login'),
+                        reverse(project-request, kwargs={'id': id, 'ans':ans}))
+
+    if ans:
+        if ans in ("yes", "no") and me.status == "":
+            if me.project.is_leader(varsContext["user"]):
+                if go:
+                    me.queue_response(ans, varsContext["user"])
+                    return HttpResponseRedirect(me.project.get_absolute_url())
+                else:
+                    return render_to_response("hackathon/join_request_response.html", varsContext,
+                        context_instance=RequestContext(request))
+        return HttpResponseRedirect('/')
+    else:
+        if me.project.is_leader(varsContext["user"]) or varsContext["user"] == me.volunteer:
+            return render_to_response("hackathon/join_request.html", varsContext,
+                context_instance=RequestContext(request))
+    return HttpResponseRedirect('/')
 
 def signup(request, edit_instance=None):
     varsContext = {}
@@ -174,17 +230,14 @@ def submit_project(request, edit_instance=None):
                     varsContext['next'] = proj.get_absolute_url()
                 return HttpResponseRedirect(varsContext['next'])
         else:
-            print("init else1")
             project_staff = StaffFormset(request.POST, prefix="staff")
             project_needs = NeedsFormset(request.POST, prefix="needs")
     else:
         if edit_instance is None:
-            print("init none1")
             form = ProjectForm()
             project_staff = StaffFormset(prefix="staff")
             project_needs = NeedsFormset(prefix="needs")
         else:
-            print("init else2")
             form = ProjectForm(instance=edit_instance)
             project_staff = StaffFormset(prefix="staff", instance=edit_instance)
             project_needs = NeedsFormset(prefix="needs", instance=edit_instance)
@@ -198,6 +251,7 @@ def submit_project(request, edit_instance=None):
 
     return render_to_response("hackathon/project_submit.html", varsContext,
                                 context_instance=RequestContext(request))
+
 
 #def submit_project_success(request):
 #    return render_to_response("hackathon/project_submit_success.html", varsContext,

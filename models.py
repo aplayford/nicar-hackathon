@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.localflavor.us.models import PhoneNumberField
 from django.template.defaultfilters import slugify
+from django.template.loader import render_to_string
 
 class SluggedModel(models.Model):
     slug = models.SlugField(max_length=50, blank=True,
@@ -55,7 +56,14 @@ class Project(SluggedModel):
         return u"%s" % self.name
     
     def leaders(self):
-        return self.staff.filter(team_leader=True).values_list(flat=True)
+        return list(self.staff.filter(team_leader=True))
+
+    def is_leader(self, pers):
+        try:
+            self.staff.get(team_leader=True, person=pers)
+            return True
+        except:
+            return False
     
     @models.permalink
     def get_absolute_url(self):
@@ -65,6 +73,81 @@ class Project(SluggedModel):
     def get_edit_url(self):
         return ('edit-project', [], {'slugProject': self.slug, 'id': self.id})
 
+###########$###########
+## Request models    ##
+## For inline forms  ##
+############$##########
+
+class JoinProjectRequest(models.Model):
+    project = models.ForeignKey('Project', related_name="volunteer_requests")
+    volunteer = models.ForeignKey('Person', related_name="projects_volunteered")
+    
+    status = models.CharField(max_length=3, choices=(('YES', 'Yes'), ('NO', 'No'),), blank=True)
+
+    do_send = models.BooleanField(default=False)
+    do_answer = models.BooleanField(default=False)
+    
+    queued_for = models.ManyToManyField('Person', related_name="requests_waiting")
+    respondent = models.ForeignKey('Person', blank=True, null=True)
+
+    @models.permalink
+    def get_yes_url(self):
+        return ('project-request-respond', [], {'id': self.id, 'ans': "yes"})
+    @models.permalink
+    def get_no_url(self):
+        return ('project-request-respond', [], {'id': self.id, 'ans': "no"})
+    @models.permalink
+    def get_absolute_url(self):
+        return ('project-request', [], {'id': self.id})
+
+
+    def send_request(self):
+        varsContext = {
+            "volunteer": self.volunteer,
+            "project": self.project,
+            "req": self
+        }
+
+        for staff in self.project.leaders():
+            staff.person.user.email_user(
+                "Someone wants to join your hackathon project",
+                render_to_string("hackathon/emails/volunteer.txt", varsContext),
+                from_email = "hackathon@nicar.adamplayford.com"
+            )
+            self.queued_for.add(staff.person)
+        
+        self.do_send = False
+        self.save()
+    
+    def queue_response(self, ans, respondent):
+        self.do_answer = True
+        self.status = ans.upper()
+        if respondent:
+            self.respondent = respondent
+        
+        if ans.lower() == "yes":
+            self.project.staff.create(
+               person=self.volunteer
+            )
+
+        self.save()
+    
+    def send_response(self):
+        code = self.status.lower()
+
+        varsContext = {
+            "req": self,
+            "project": self.project
+        }
+
+        self.volunteer.user.email_user(
+            "Hackathon Project: %s" % self.project.name,
+            render_to_string("hackathon/emails/response_%s.txt" % code, varsContext),
+            from_email = "hackathon@nicar.adamplayford.com"
+        )
+
+        self.do_answer = False
+        self.save()
 
 ###########$###########
 ## F-keyed models    ##
