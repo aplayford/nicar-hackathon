@@ -61,9 +61,9 @@ def project(request, slugProject, id, edit=False):
     if varsContext["me"].slug != slugProject:
         return HttpResponseRedirect(varsContext["me"].get_absolute_url())
     
-    owner = me.leader()
-    if varsContext['logged_in'] and owner is not None:
-        can_edit = varsContext["can_edit"] = (owner.person == varsContext['user'])
+    owners = me.leaders()
+    if varsContext['logged_in'] and len(owners):
+        can_edit = varsContext["can_edit"] = (varsContext['user'] in owners)
     else:
         can_edit = False
 

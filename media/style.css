@@ -33,6 +33,7 @@ ul li {margin:5px 0 8px;list-style-type:square;}
 /*****************************
  * Hackathon-specific styles *
  *****************************/
+.clear { clear: both; }
 
 .field { margin-bottom: 10px; }
 .field.error { background-color: #ff3131; padding: 8px; }
@@ -42,3 +43,10 @@ ul li {margin:5px 0 8px;list-style-type:square;}
 .login-wrap { text-align: right; background-color: #FFBF40; height: 15px; }
 .login { padding-top: 15px;	padding: 10px; float: right; background-color: #FFCF50; }
 .smalltxt { font-size: 12px; color: #555; }
+.smalltxt.ctl { padding-left: 5px;}
+
+.description p { font-size: 20px; margin-bottom: 15px;}
+
+.action a { padding: 15px; margin: 15px; float: right; background-color: black; color: white; }
+.action a:hover { color: #ccc; }
+/*.action a { padding: 15px; margin: 45px; background-color: #FFBF40; }*/

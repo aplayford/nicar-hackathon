@@ -54,11 +54,8 @@ class Project(SluggedModel):
     def __unicode__(self):
         return u"%s" % self.name
     
-    def leader(self):
-        try:
-            return self.staff.get(team_leader=True)
-        except ProjectStaff.DoesNotExist:
-            return None
+    def leaders(self):
+        return self.staff.filter(project_leader=True).values_list(flat=True)
     
     @models.permalink
     def get_absolute_url(self):
@@ -88,7 +85,7 @@ class ProjectNeed(models.Model):
 class ProjectStaff(models.Model):
     project = models.ForeignKey("Project", related_name="staff")
     person = models.ForeignKey("Person", related_name="projects")
-    roles = models.ManyToManyField('RoleChoice', blank=True)
+    #roles = models.ManyToManyField('RoleChoice', blank=True)
     team_leader = models.BooleanField()
 
     def __unicode__(self):
@@ -97,6 +94,9 @@ class ProjectStaff(models.Model):
     class Meta:
         verbose_name_plural = "project staff"
         unique_together = ('team_leader', 'project',)
+    
+    def get_absolute_url(self):
+        return self.person.get_absolute_url()
 
 ######################
 ## Helper models    ##
