@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from hackathon.models import Person, Project, ProjectNeed, ProjectStaff, RoleChoice
+from hackathon.models import Person, Project, ProjectNeed, ProjectStaff, RoleChoice, JoinProjectRequest
 
 ########################
 ## Person admin pages ##
