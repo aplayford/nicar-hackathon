@@ -114,8 +114,8 @@ def project_request(request, id, ans=None, go=False):
     varsContext["ans"] = ans
 
     if not varsContext['logged_in']:
-        return HttpResponseRedirect("%s?next=%s" % reverse('login'),
-                        reverse(project-request, kwargs={'id': id, 'ans':ans}))
+        return HttpResponseRedirect("%s?next=%s" % (reverse('login'),
+                        reverse(project-request, kwargs={'id': id, 'ans':ans})))
 
     if ans:
         if ans in ("yes", "no") and me.status == "":
