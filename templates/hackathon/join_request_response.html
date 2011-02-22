@@ -7,11 +7,11 @@
 	{% ifequal ans "no" %}
 	<b>REJECT {{me.volunteer}} for {{me.project}}</b>
 
-	<div class="description">You're about to reject {{me.volunteer}}'s help for your project, {{me.project}}. Are you sure?</div>
+	<div class="description">You're about to reject {{me.volunteer}}'s help for your project, {{me.project}}. Are you sure?</div> <br />
 
-	<div>If you push reject, you'll be taken back to your project page and {{me.volunteer}} will be sent the following e-mail:</div>
+	<div>If you push reject, you'll be taken back to your project page and {{me.volunteer}} will be sent the following e-mail:</div> <br />
 
-	<code>Sorry to hear, but your application to join project "{{me.project}}" was rejected. Don't feel bad -- it's probably not you. That spot likely was just filled before you asked. Or maybe the project's needs changed.
+	<code>Sorry to hear, but your application to join project "{{me.project}}" was rejected. Don't feel bad -- it's probably not you. That spot likely was just filled before you asked. Or maybe the project's needs changed. <br /> <br />
 
 	Either way, don’t worry! Head back to http://nicar.adamplayford.com; there are going to be many other projects to join.</code>
 
@@ -21,11 +21,11 @@
 	{% endifequal %}
 	
 	{% ifequal ans "yes" %}
-	<b>ACCEPT {{me.volunteer}} for {{me.project}}</b>
+	<b>ACCEPT {{me.volunteer}} for {{me.project}}</b> <br />
 
-	<div class="description">You're about to accept {{me.volunteer}}'s help for your project, {{me.project}}. Are you sure?</div>
+	<div class="description">You're about to accept {{me.volunteer}}'s help for your project, {{me.project}}. Are you sure?</div> <br />
 
-	<div>If you push accept, you'll be taken to the project edit page, so you can adjust your project's needs if necessary. We suggest removing needs when you've got enough people with a given skill set.</div>
+	<div>If you push accept, you'll be taken to the project edit page, so you can adjust your project's needs if necessary. We suggest removing needs when you've got enough people with a given skill set.</div> <br />
 
 	<div class="action"><a href="go/">Accept</a></div>
 	
