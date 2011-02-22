@@ -4,7 +4,7 @@
 
 {% block bodyContent %}
 
-<div class="line-header">Project Sign-up</div> 
+<h2><div class="line-header">Project Sign-up</div></h2>
 
 <form action="{{target}}" method="post">
 	{{form.id}}
@@ -32,24 +32,26 @@
 		{{form.repo}} <br>
 		{% if form.repo.errors %}<div class="error_txt">{{form.repo.errors}}</div>{% endif %}
 	</div>
-	
-	<div class="">PROJECT STAFF</div>
-	{% for form in project_staff.forms %}
-		{% for field in form %}
-		{% include "hackathon/includes/field.html" %}
-		{% endfor %}
-	{% endfor %}
-	{{project_staff.management_form}}
 
-	<b>PROJECT NEEDS</b>
-	{% for form in project_needs.forms %}
-		{% for field in form %}
-		{% include "hackathon/includes/field.html" %}
+	<div class="" style="">
+		<b>Project staff list:</b>
+		{% for form in project_staff.forms %}
+			<div>{{form.person}} {{form.team_leader}} team leader? {{form.DELETE}} remove?</div>
 		{% endfor %}
-	{% endfor %}
-	{{project_needs.management_form}}
+		{{project_staff.management_form}}
+	</div>
+
+	<div class="" style="">
+		<b>Seeking volunteers for:</b>
+		{% for form in project_needs.forms %}
+			<div>{{form.role_needed}} {{form.DELETE}} remove?</div>
+		{% endfor %}
+		{{project_needs.management_form}}
+	</div>
 
 	{% csrf_token %}
+
+	<div style="clear: both;"></div>
 
 	<input type="submit" value="Submit" />
 

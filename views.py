@@ -212,8 +212,8 @@ def submit_project(request, edit_instance=None):
             varsContext['next'] = None
         varsContext['target'] = reverse(view_url, kwargs=view_kwargs)
     
-    StaffFormset = inlineformset_factory(Project, ProjectStaff)
-    NeedsFormset = inlineformset_factory(Project, ProjectNeed)
+    StaffFormset = inlineformset_factory(Project, ProjectStaff, extra=8)
+    NeedsFormset = inlineformset_factory(Project, ProjectNeed, extra=8)
     
     if request.method == 'POST':
         if edit_instance is None:
