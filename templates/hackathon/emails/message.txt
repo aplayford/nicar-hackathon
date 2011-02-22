@@ -1,0 +1,12 @@
+{{from}} sent you a note through nicar.adamplayford.com:
+=======================
+
+
+{{msg.text}}
+
+
+
+=======================
+To respond, click: {% url message-person id=from.id slugPerson=from.slug %}
+
+-- The ProjectPitcher Team

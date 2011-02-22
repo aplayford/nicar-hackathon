@@ -1,0 +1,11 @@
+{% extends "hackathon/base.html" %}
+
+{% block pageTitle %}NICAR Hackathon: Send Message{% endblock %}
+
+{% block bodyContent %}
+<h2>{{me}}</h2>
+<h3>Message sent!</h3>
+
+<div><a href="{% url index %}">Return home</a>, or go back to <a href="{% url person id=me.id slugPerson=me.slug %}">{{me}}'s profile</a>.</div> <br>
+
+{% endblock %}

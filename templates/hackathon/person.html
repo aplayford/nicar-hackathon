@@ -25,9 +25,9 @@
 
 	<br />
 
-	Want to recruit me? <a href="">E-mail {{me.name}}</a>.
+	Want to recruit me? <a href="{% url message-person id=me.id slugPerson=me.slug %}">Send a message to {{me.name}}</a>.
 
-	<div class="action"><a href="#">Send an e-mail</a></div>
+	<div class="action"><a href="{% url message-person id=me.id slugPerson=me.slug %}">Send message</a></div>
 	<div class="clear"></div>
  
 {% endblock bodyContent %}

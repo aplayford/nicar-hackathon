@@ -1,0 +1,26 @@
+{% extends "hackathon/base.html" %}
+
+{% block pageTitle %}NICAR Hackathon: Send Message{% endblock %}
+
+{% block bodyContent %}
+<h2>{{me}}</h2>
+<h3>Send message</h3>
+
+<div>Write in the form below to send an e-mail to user {{me}}.</div> <br>
+
+<div>(Your e-mail address will not be exposed, so if you want them to have it, make sure to give it to them. Also, HTML will not render -- we're old-fashioned plain text.)</div> <br>
+
+
+<form action="" method="post">
+
+	{% for field in message_form %}
+	{% include "hackathon/includes/field.html" %}
+	{% endfor %}
+
+	{% csrf_token %}
+
+	<input type="submit" value="Submit" />
+
+</form>
+
+{% endblock %}
