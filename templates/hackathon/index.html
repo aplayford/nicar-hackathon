@@ -39,7 +39,7 @@
     <div class="line-header">Participants:</div>
 	{% for p in people %}
 		<div><span class="date">
-			<a href="{{ p.get_absolute_url}}">{{ p.name }}{% if not forloop.last %}, {% endif %}</a>
+			<a href="{{ p.get_absolute_url}}">{{ p.name }}</a>{% if not forloop.last %}, {% endif %}</a>
 		</span></div>
 	{% empty %}
 		<div>No participants registered. <a href="{% url signup %}">Start the trend!</a></div>
