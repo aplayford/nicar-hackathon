@@ -1,0 +1,55 @@
+$colorPrimaryDark: #07251a;
+$colorPrimary: #092e20;
+$colorPrimaryLight: #6b8279;
+$colorTextLight: #d2d9d7;
+$fontSerif: 'Copse', georgia, serif;
+
+.narrative	{
+	background-color: $colorTextLight;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+#login-wrap {
+	background-color: $colorPrimaryLight;
+	padding: 10px;
+	position: absolute;
+	right: 0;
+	a {
+		color: $colorPrimaryDark;
+	}
+}
+
+body {
+	/*background-color: $colorPrimary; */
+	font-family: $fontSerif;
+	font-size: 16px;
+	line-height: 24px;
+}	
+
+#header {
+	background-color: $colorPrimary;
+	border-bottom: 5px solid $colorPrimaryDark;
+	color: #6b8279;
+	h1 {
+		font-size: 32px;
+		line-height: 60px;
+		margin: 0;
+	}
+}
+
+#main {
+	background-color: $colorPrimaryLight;
+}
+
+#footer {
+	background-color: $colorPrimary;
+	color: $colorTextLight;
+	a {
+		color: $colorPrimaryLight;
+	}
+	p {
+		line-height: 40px;
+		margin: 0;
+	}
+}
