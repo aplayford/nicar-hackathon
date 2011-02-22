@@ -1,6 +1,8 @@
 An automated note from nicar.adamplayford.com:
 
-You've been accepted! You are now a member of {{project}}. Here’s a link to the project page: http://nicar.adamplayford.com{{project.get_absolute_url}}
+You've been accepted! You are now a member of the project "{{project}}."
+
+Here’s a link to the project page: http://nicar.adamplayford.com{{project.get_absolute_url}}
 
 Thanks,
 -- The ProjectPitcher Team

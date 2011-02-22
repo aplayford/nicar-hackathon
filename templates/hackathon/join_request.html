@@ -4,19 +4,24 @@
 
 {% block bodyContent %}
 
-	<h2>{{me.project}}</h2>
+	<h2>Your application for {{me.project}}</h2>
+
 	{% ifequal me.status "YES" %}
-	<div>You've been accepted! You are now a member of <a href="{{me.project.get_absolute_url}}">{{me.project}}.</a></div>
+	<div>You've been accepted! You are now a member of <a href="{{me.project.get_absolute_url}}">{{me.project}}</a> project.</div>
+
+	<div>Congrats!</div>
 
 	{% else %}
 	{% ifequal me.status "NO" %}
-	<div>Sorry to hear, but you were rejected from joining {{project}}. It's probably not you: That spot may have been filled before you asked, or the project's needs may have changed.</div>
+	<div>Sorry to hear, but your application to join the {{project}} project was rejected. Don't feel bad -- it's probably not you. That spot likely just filled before you asked. Or maybe the project's needs changed.</div>
 
-	<div>But don’t worry! Head back to the <a href="{% url index %}">project list</a>; there will be many other projects to join.</div>
+	<div>Either way, don’t worry! Head back to the <a href="{% url index %}">project list</a>; there are going to be many other projects to join.</div>
 
 	{% else %}
 
-	<div>You applied to help with {{me.project}}, but no answer yet! Your request is waiting for a team leader's approval. Check back soon.</div>
+	<div>You applied to help with the <a href="{{me.project.get_absolute_url}}">{{me.project}}</a> project but no answer yet! Your request is waiting for a team leader's approval.</div>
+	
+	<div>You'll get an e-mail when there's an update.</div>
 
 	{% endifequal %}{% endifequal %}
 
