@@ -55,7 +55,7 @@ class Project(SluggedModel):
         return u"%s" % self.name
     
     def leaders(self):
-        return self.staff.filter(project_leader=True).values_list(flat=True)
+        return self.staff.filter(team_leader=True).values_list(flat=True)
     
     @models.permalink
     def get_absolute_url(self):
