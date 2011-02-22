@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 import copy
 
-from hackathon.models import Person, Project
+from hackathon.models import Person, Project, EmailMessage
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -48,6 +48,11 @@ class PersonForm(forms.ModelForm):
             'roles_willing': forms.CheckboxSelectMultiple(),
             'user': forms.HiddenInput(),
         }
+
+class EmailMessageForm(forms.ModelForm):
+    class Meta:
+        model = EmailMessage
+        exclude = ('msg_from', 'msg_to', 'needs_send',)
 
 def uncommit_copy(kwargs):
     args = copy.deepcopy(kwargs)

@@ -5,6 +5,8 @@ urlpatterns = patterns('hackathon.views',
     url(r'^person/(?P<id>[\d]+)/(?P<slugPerson>[\w-]+)/$', 'person', name="person"),
     url(r'^person/(?P<id>[\d]+)/(?P<slugPerson>[\w-]+)/edit/$',
                         'person', {'edit': True}, name="edit-person"),
+    url(r'^person/(?P<id>[\d]+)/(?P<slugPerson>[\w-]+)/message/$',
+                        'message_person', name="message-person"),
     
     url(r'^project/(?P<id>[\d]+)/(?P<slugProject>[\w-]+)/$', 'project', name="project"),
     url(r'^project/(?P<id>[\d]+)/(?P<slugProject>[\w-]+)/edit/$',

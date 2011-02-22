@@ -5,8 +5,8 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login
 
-from hackathon.models import Person, Project, ProjectNeed, ProjectStaff, JoinProjectRequest
-from hackathon.forms import ProjectForm, PersonForm, UserForm
+from hackathon.models import Person, Project, ProjectNeed, ProjectStaff, JoinProjectRequest, EmailMessage
+from hackathon.forms import ProjectForm, PersonForm, UserForm, EmailMessageForm
 
 def check_login(req):
     if req.user.is_authenticated():
@@ -52,6 +52,36 @@ def person(request, slugPerson, id, edit=False):
             return signup(request, edit_instance=me)
 
     return render_to_response("hackathon/person.html", varsContext, context_instance=RequestContext(request))
+
+def message_person(request, slugPerson, id):
+    varsContext = {}
+    varsContext.update(check_login(request))
+
+    me = varsContext["me"] = get_object_or_404(Person, id=id)
+    if varsContext["me"].slug != slugPerson:
+        return HttpResponseRedirect(varsContext["me"].get_absolute_url())
+
+    if not varsContext['logged_in']:
+        return HttpResponseRedirect("%s?next=%s" % (reverse('login'), reverse('message-person', kwargs={'slugPerson': me.slug, 'id': me.id})))
+
+    msg_from = varsContext['user']
+    msg_to = me
+
+    if request.method == 'POST':
+        message_form = EmailMessageForm(request.POST)
+
+        if(message_form.is_valid()):
+            msg_obj = message_form.save(commit=False)
+            (msg_obj.msg_to, msg_obj.msg_from) = (msg_to, msg_from)
+            msg_obj.save()
+            return render_to_response("hackathon/message_person_sent.html", varsContext, context_instance=RequestContext(request))
+    else:
+        message_form = EmailMessageForm()
+    
+    varsContext["message_form"] = message_form
+
+    return render_to_response("hackathon/message_person.html", varsContext, context_instance=RequestContext(request))
+    
 
 def project(request, slugProject, id, edit=False):
     varsContext = {}

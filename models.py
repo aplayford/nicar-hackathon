@@ -73,10 +73,10 @@ class Project(SluggedModel):
     def get_edit_url(self):
         return ('edit-project', [], {'slugProject': self.slug, 'id': self.id})
 
-###########$###########
-## Request models    ##
-## For inline forms  ##
-############$##########
+#######$##############
+## Queue models     ##
+## For inline forms ##
+########$#############
 
 class JoinProjectRequest(models.Model):
     project = models.ForeignKey('Project', related_name="volunteer_requests")
@@ -147,6 +147,30 @@ class JoinProjectRequest(models.Model):
         )
 
         self.do_answer = False
+        self.save()
+
+class EmailMessage(models.Model):
+    msg_from = models.ForeignKey('Person', related_name="messages_from")
+    msg_to = models.ForeignKey('Person', related_name="messages_to")
+
+    subj = models.CharField(max_length=150, verbose_name="subject")
+    text = models.TextField(verbose_name="message text")
+
+    needs_send = models.BooleanField(default=True)
+
+    def do_send(self):
+        varsContext = {
+            "msg": self,
+            "from": self.msg_from
+        }
+
+        self.msg_to.user.email_user(
+            "Hackathon: %s" % self.subj,
+            render_to_string("hackathon/emails/message.txt", varsContext),
+            from_email = "hackathon@nicar.adamplayford.com"
+        )
+
+        self.needs_send = False
         self.save()
 
 ###########$###########
