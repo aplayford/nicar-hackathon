@@ -226,6 +226,12 @@ def submit_project(request, edit_instance=None):
                 project_staff.save()
                 project_needs.save()
 
+                user = proj.staff.get_or_create(
+                    person = varsContext['user']
+                )[0]
+                user.team_leader = True
+                user.save()
+
                 if varsContext['next'] is None:
                     varsContext['next'] = proj.get_absolute_url()
                 return HttpResponseRedirect(varsContext['next'])
