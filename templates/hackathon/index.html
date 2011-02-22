@@ -30,7 +30,7 @@
     		{{ pr.description|truncatewords:150 }}
     	</div>
     	{% if pr.needs.count %}<div class="needs">
-			<strong>Still looking for: {% for need in pr.needs.all %}{{need}}{% if not forloop.last %},{% endif %}{% endfor %}</strong>
+			<strong>Still looking for: {% for need in pr.needs.all %}{{need}}{% if not forloop.last %}, {% endif %}{% endfor %}</strong>
 		</div>{% endif %}
 	{% empty %}
 		<div>No projects proposed yet. <a href="{% url submit-project %}">Be the first!</a></div>
