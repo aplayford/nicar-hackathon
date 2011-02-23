@@ -1,8 +1,42 @@
+.line-header {font-weight:bold;font-size:32px;margin:10px 0 15px;}
+div.stream {margin:5px 0;font-size:14px;}
+div.stream .left {width:350px;float:left;}
+div.stream .right {width:150px;float:right;}
+span.date {display:inline-block;margin:0 5px 0 0;color:#333;font-weight:bold;}
+ul {padding:0 0 0 25px;}
+ul li {margin:5px 0 8px;list-style-type:square;}
+
+
+/*****************************
+ * Hackathon-specific styles *
+ *****************************/
+
+.field { margin-bottom: 10px; }
+.field.error { background-color: #ff3131; padding: 8px; }
+.field.error li { list-style-type: none; }
+.field.error .error_txt { color: #ddd; }
+
+.smalltxt { font-size: 12px; color: #555; }
+.smalltxt.ctl { padding-left: 5px;}
+
+.description p { font-size: 20px; margin-bottom: 15px;}
+
+.action a { padding: 15px; margin: 15px; float: right; background-color: black; color: white; }
+.action a:hover { color: #ccc; }
+/*.action a { padding: 15px; margin: 45px; background-color: #FFBF40; }*/
+
+
+
 $colorPrimaryDark: #07251a;
 $colorPrimary: #092e20;
 $colorPrimaryLight: #6b8279;
 $colorTextLight: #d2d9d7;
-$fontSerif: 'Copse', georgia, serif;
+$fontSans: 'Arimo', arial, sans-serif;
+$fontSerif: 'Georgia', Georgia, serif;
+
+a {
+	color: $colorPrimary;
+}
 
 .narrative	{
 	background-color: $colorTextLight;
@@ -30,16 +64,32 @@ body {
 #header {
 	background-color: $colorPrimary;
 	border-bottom: 5px solid $colorPrimaryDark;
-	color: #6b8279;
 	h1 {
-		font-size: 32px;
+		font-weight: 200;
+		font-size: 42px;
 		line-height: 60px;
 		margin: 0;
+		a {
+			color: $colorPrimaryLight;
+			text-decoration: none;
+		}
 	}
 }
 
 #main {
 	background-color: $colorPrimaryLight;
+}
+
+h2 {
+	font-size: 36px;
+	font-weight: 200;
+	a {
+		border-top: 1px solid #000;
+		display: block;
+		font-size: 24px;
+		margin-top: 20px;
+		padding: 20px 0 0 0;
+	}
 }
 
 #footer {
@@ -52,4 +102,19 @@ body {
 		line-height: 40px;
 		margin: 0;
 	}
+}
+
+.needs + .line-header {
+	border-top: 1px solid #000;
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
+.needs {
+margin-top: 16px;
+}
+
+.date {
+display: block;
+padding-bottom: 16px;
 }
