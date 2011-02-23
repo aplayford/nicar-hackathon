@@ -13,6 +13,8 @@
 
 	{% if me.skills_summary %}<div class="has"><strong>Technical skills: </strong>{{ me.skills_summary }}</div>{% endif %}
 
+	{% if me.roles_willing.count %}<div class="help"><strong>Willing to help with:</strong> {% for role in me.roles_willing %}{{role}}{% if not forloop.last %}, {% endif %}{% endfor %}
+
 	<div class="projects">
 		<strong>Project(s): </strong>
 		{% for projectstaff in me.projects.all %}
